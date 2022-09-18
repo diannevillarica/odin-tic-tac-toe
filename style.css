@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Fredoka One", cursive;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+button {
+  font-family: "Fredoka One", cursive;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 1rem 3vw;
+  cursor: pointer;
+  background-color: khaki;
+}
+
+.container {
+  background: url(/images/cat.svg) no-repeat bottom right;
+  background-size: 10vmax;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  display: flex;
+  flex-flow: column wrap;
+  place-content: center;
+}
+
+.score {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-bottom: 10vh;
+}
+
+.score > *:not(:last-child) {
+  margin-bottom: 2vh;
+}
+
+.score .final {
+  display: none;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-content: center;
+}
+
+.cell {
+  width: 10rem;
+  height: 10rem;
+  border: grey solid 1px;
+  cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+.cell.circle {
+  background: url(/images/circle.svg) no-repeat center;
+  background-size: 85%;
+}
+
+.cell.cross {
+  background: url(/images/cross.svg) no-repeat center;
+  background-size: contain;
+}
+
+.cell.circle,
+.cell.cross {
+  cursor: not-allowed;
+}
