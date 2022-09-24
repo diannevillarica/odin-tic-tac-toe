@@ -23,10 +23,16 @@ p {
 button {
   font-family: "Fredoka One", cursive;
   border: none;
-  border-radius: 0.2rem;
-  padding: 1rem 3vw;
+  border-radius: 0.8rem;
+  padding: 1rem 2.5rem;
   cursor: pointer;
   background-color: khaki;
+}
+
+button.sm {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.4rem;
+  background-color: rgb(140, 240, 198);
 }
 
 .container {
@@ -54,11 +60,10 @@ button {
   margin-bottom: 2vh;
 }
 
-.score .final {
-  display: none;
-}
-
 .board {
+  max-width: fit-content;
+  margin: 0 auto;
+
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-content: center;
@@ -104,4 +109,21 @@ button {
 .cell.circle,
 .cell.cross {
   cursor: not-allowed;
+}
+
+form {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2rem;
+  place-content: center;
+}
+
+form > * {
+  padding: 0.5rem 0;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid grey;
+  font-family: "Fredoka One", cursive;
 }

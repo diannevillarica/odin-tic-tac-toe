@@ -1,9 +1,5 @@
-// factory functions - functions that create an object without using the new keyword
-// module pattern uses private and public methods/properties, return keyword, and IIFE
-// Rule of thumb: if you only ever need ONE of something (gameBoard, displayController), use a module.
-// If you need multiples of something (players!), create them with factories.
-// X is 1 or true,
-// O is -1 or false
+// O is 1 or true,
+// X is -1 or false
 "use strict";
 
 const gameBoard = (function () {
@@ -44,11 +40,11 @@ const gameBoard = (function () {
       let row = gameBoardData[i][0] + gameBoardData[i][1] + gameBoardData[i][2];
       let col = gameBoardData[0][i] + gameBoardData[1][i] + gameBoardData[2][i];
       if (row == 3 || col == 3) {
-        console.log("player 1 wins");
-        displayController.reset();
+        displayController.displayPlayer1Win();
+        document.querySelector(".reset").removeAttribute("disabled");
       } else if (row == -3 || col == -3) {
-        console.log("player 2 wins");
-        displayController.reset();
+        displayController.displayPlayer2Win();
+        document.querySelector(".reset").removeAttribute("disabled");
       }
     }
     //check for diagonals
@@ -57,11 +53,11 @@ const gameBoard = (function () {
     let diagonal2 =
       gameBoardData[0][2] + gameBoardData[1][1] + gameBoardData[2][0];
     if (diagonal1 == 3 || diagonal2 == 3) {
-      console.log("player 1 wins");
-      displayController.reset();
+      displayController.displayPlayer1Win();
+      document.querySelector(".reset").removeAttribute("disabled");
     } else if (diagonal1 == -3 || diagonal2 == -3) {
-      console.log("player 2 wins");
-      displayController.reset();
+      displayController.displayPlayer2Win();
+      document.querySelector(".reset").removeAttribute("disabled");
     }
 
     // check for tie
@@ -71,50 +67,50 @@ const gameBoard = (function () {
       gameBoardData[2].indexOf(0) == -1
     ) {
       // FIXME: win and tie happening at the last cell
-      console.log("tie");
-      displayController.reset();
+      displayController.displayTie();
+      document.querySelector(".reset").removeAttribute("disabled");
     }
   };
 
-  return { gameBoardData };
+  return { cells };
 })();
 
 const displayController = (function () {
-  const reset = () => {
-    console.log("reset the game");
-    const cells = document.querySelectorAll("[data-cell]");
-    cells.forEach((cell) => {
+  const displayReset = () => {
+    gameBoard.cells.forEach((cell) => {
       cell.classList.remove("circle");
       cell.classList.remove("cross");
-      // FIXME: remove once prop
-      cell.removeEventListener("click");
+      location.reload(); // reload page
     });
-    gameBoard.gameBoardData = [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-    ];
   };
 
-  document.querySelector(".reset").addEventListener("click", reset);
+  // TODO:
+  // capture player names via form and create player objects
+  // on load have player enter name - all the time tho?
 
-  return { reset };
+  const displayPlayer1Win = () => {
+    document.querySelector(".final").innerText = "Player 1 wins!";
+    document.getElementById("board").style.pointerEvents = "none";
+  };
+
+  const displayPlayer2Win = () => {
+    document.querySelector(".final").innerText = "Player 2 wins!";
+    document.getElementById("board").style.pointerEvents = "none";
+  };
+
+  const displayTie = () => {
+    document.querySelector(".final").innerText = "It's a draw!";
+    document.getElementById("board").style.pointerEvents = "none";
+  };
+
+  document.querySelector(".reset").addEventListener("click", displayReset);
+
+  return { displayReset, displayPlayer1Win, displayPlayer2Win, displayTie };
 })();
 
-const Player = (playerNumber, playerMarker) => {
-  // do something with that selection
-  // return that selection
-  return { playerNumber, playerMarker };
+const Player = (name) => {
+  return { name };
 };
 
-const trixie = Player(1, "cross");
-const henry = Player(2, "circle");
-
-// tic tac toe concept
-// reset game
-// player clicks on a tile , their class gets recorded
-// check for win or draw - check curr arr against winning combinations
-// if win or draw
-// do step 1
-// if not
-// do step 2
+const trixie = Player(name);
+const henry = Player(name);
