@@ -11,35 +11,33 @@
   <body>
     <div class="container">
       <div class="score">
-        <button class="reset" disabled>Play Again</button>
+        <button class="button button-reset" disabled>Play Again</button>
         <p class="final">Enter your names</p>
         <div class="player">
-          <form action="#" method="post">
+          <form action="#" method="post" id="form">
             <p>
               <label for="player1"
                 >O:
                 <input
-                  id="player1"
                   type="text"
                   placeholder="Player 1"
                   minlength="3"
                   maxlength="10"
                 />
+                <!-- <input class="button button-form" type="submit" value=":)" /> -->
               </label>
-              <button class="sm" id="player1Name" type="submit">:)</button>
             </p>
             <p>
               <label for="player2"
                 >X:
                 <input
-                  id="player2"
                   type="text"
                   placeholder="Player 2"
                   minlength="3"
                   maxlength="10"
                 />
+                <!-- <input class="button button-form" type="submit" value=":)" /> -->
               </label>
-              <button class="sm" id="player2Name" type="submit">:)</button>
             </p>
           </form>
         </div>

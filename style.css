@@ -20,7 +20,7 @@ p {
   font-size: 1.6rem;
 }
 
-button {
+button.button-reset {
   font-family: "Fredoka One", cursive;
   border: none;
   border-radius: 0.8rem;
@@ -29,7 +29,9 @@ button {
   background-color: khaki;
 }
 
-button.sm {
+input.button-form {
+  font-family: "Fredoka One", cursive;
+  cursor: pointer;
   padding: 0.5rem 1.5rem;
   border-radius: 0.4rem;
   background-color: rgb(140, 240, 198);

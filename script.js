@@ -2,6 +2,10 @@
 // X is -1 or false
 "use strict";
 
+const Player = (name) => {
+  return { name };
+};
+
 const gameBoard = (function () {
   let gameBoardData = [
     [0, 0, 0],
@@ -41,10 +45,10 @@ const gameBoard = (function () {
       let col = gameBoardData[0][i] + gameBoardData[1][i] + gameBoardData[2][i];
       if (row == 3 || col == 3) {
         displayController.displayPlayer1Win();
-        document.querySelector(".reset").removeAttribute("disabled");
+        document.querySelector(".button-reset").removeAttribute("disabled");
       } else if (row == -3 || col == -3) {
         displayController.displayPlayer2Win();
-        document.querySelector(".reset").removeAttribute("disabled");
+        document.querySelector(".button-reset").removeAttribute("disabled");
       }
     }
     //check for diagonals
@@ -54,10 +58,10 @@ const gameBoard = (function () {
       gameBoardData[0][2] + gameBoardData[1][1] + gameBoardData[2][0];
     if (diagonal1 == 3 || diagonal2 == 3) {
       displayController.displayPlayer1Win();
-      document.querySelector(".reset").removeAttribute("disabled");
+      document.querySelector(".button-reset").removeAttribute("disabled");
     } else if (diagonal1 == -3 || diagonal2 == -3) {
       displayController.displayPlayer2Win();
-      document.querySelector(".reset").removeAttribute("disabled");
+      document.querySelector(".button-reset").removeAttribute("disabled");
     }
 
     // check for tie
@@ -68,7 +72,7 @@ const gameBoard = (function () {
     ) {
       // FIXME: win and tie happening at the last cell
       displayController.displayTie();
-      document.querySelector(".reset").removeAttribute("disabled");
+      document.querySelector(".button-reset").removeAttribute("disabled");
     }
   };
 
@@ -76,6 +80,39 @@ const gameBoard = (function () {
 })();
 
 const displayController = (function () {
+  const createPlayer = (function (event) {
+    // event.preventDefault();
+    const input1 = document.getElementsByTagName("input")[0].value;
+    const input2 = document.getElementsByTagName("input")[1].value;
+    const player1 = Player(input1);
+    const player2 = Player(input2);
+
+    return { player1, player2 };
+  })();
+
+  // TODO:
+  // add the player names in the final score message
+  document.querySelector("form").addEventListener("input", createPlayer);
+
+  const displayPlayer1Win = () => {
+    console.log(createPlayer.player1.name);
+    document.querySelector(
+      ".final"
+    ).innerText = `${createPlayer.player1.name} wins!`;
+    document.getElementById("board").style.pointerEvents = "none";
+  };
+
+  const displayPlayer2Win = () => {
+    document.querySelector(
+      ".final"
+    ).innerText = `${createPlayer.player2.name} wins!`;
+    document.getElementById("board").style.pointerEvents = "none";
+  };
+
+  const displayTie = () => {
+    document.querySelector(".final").innerText = "It's a draw!";
+    document.getElementById("board").style.pointerEvents = "none";
+  };
   const displayReset = () => {
     gameBoard.cells.forEach((cell) => {
       cell.classList.remove("circle");
@@ -84,33 +121,15 @@ const displayController = (function () {
     });
   };
 
-  // TODO:
-  // capture player names via form and create player objects
-  // on load have player enter name - all the time tho?
+  document
+    .querySelector(".button-reset")
+    .addEventListener("click", displayReset);
 
-  const displayPlayer1Win = () => {
-    document.querySelector(".final").innerText = "Player 1 wins!";
-    document.getElementById("board").style.pointerEvents = "none";
+  return {
+    displayReset,
+    displayPlayer1Win,
+    displayPlayer2Win,
+    displayTie,
+    createPlayer,
   };
-
-  const displayPlayer2Win = () => {
-    document.querySelector(".final").innerText = "Player 2 wins!";
-    document.getElementById("board").style.pointerEvents = "none";
-  };
-
-  const displayTie = () => {
-    document.querySelector(".final").innerText = "It's a draw!";
-    document.getElementById("board").style.pointerEvents = "none";
-  };
-
-  document.querySelector(".reset").addEventListener("click", displayReset);
-
-  return { displayReset, displayPlayer1Win, displayPlayer2Win, displayTie };
 })();
-
-const Player = (name) => {
-  return { name };
-};
-
-const trixie = Player(name);
-const henry = Player(name);
