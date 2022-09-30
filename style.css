@@ -38,8 +38,7 @@ input.button-form {
 }
 
 .container {
-  background: url(https://github.com/diannevillarica/odin-tic-tac-toe/blob/main/images/cat.svg)
-    no-repeat bottom right;
+  background: url(/images/cat.svg) no-repeat bottom right;
   background-size: 10vmax;
   width: 100vw;
   height: 100vh;
@@ -100,14 +99,12 @@ input.button-form {
 }
 
 .cell.circle {
-  background: url(https://github.com/diannevillarica/odin-tic-tac-toe/blob/main/images/circle.svg)
-    no-repeat center;
+  background: url(/images/circle.svg) no-repeat center;
   background-size: 85%;
 }
 
 .cell.cross {
-  background: url(https://github.com/diannevillarica/odin-tic-tac-toe/blob/main/images/cross.svg)
-    no-repeat center;
+  background: url(/images/cross.svg) no-repeat center;
   background-size: contain;
 }
 
