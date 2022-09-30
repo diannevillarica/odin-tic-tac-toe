@@ -14,10 +14,14 @@ html {
 
 body {
   font-family: "Fredoka One", cursive;
+  background: url(./images/cat.svg) no-repeat bottom right;
+  background-size: 10vmax;
+  width: 100vw;
+  height: 100vh;
 }
 
 p {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 
 button.button-reset {
@@ -38,10 +42,10 @@ input.button-form {
 }
 
 .container {
-  background: url(./images/cat.svg) no-repeat bottom right;
-  background-size: 10vmax;
+  /* background: url(./images/cat.svg) no-repeat bottom right;
+  background-size: 10vmax; */
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   overflow-y: hidden;
   margin: 0 auto;
   padding: 0 1rem;
@@ -128,4 +132,20 @@ input {
   border: none;
   border-bottom: 1px solid grey;
   font-family: "Fredoka One", cursive;
+}
+.footer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  padding-right: 1rem;
+  font-size: 1.3rem;
+}
+
+.footer a {
+  color: rgb(142, 143, 143);
+  text-decoration: none;
 }
